@@ -61,7 +61,7 @@
 
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 249px;"\>
     <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-    <img src="../../logo/logoputih.png" style="width: 50px; height: 50px; margin-right: 8px; margin-left: 10px;" alt="logo">
+    <img src="{{url('logo/logoputih.png')}}" style="width: 50px; height: 50px; margin-right: 8px; margin-left: 10px;" alt="logo">
       <span class="fs-4">Nunnacare</span>
     </a>
     <hr>
