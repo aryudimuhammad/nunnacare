@@ -144,7 +144,7 @@ class CetakController extends Controller
 
 
 
-        $pdf = PDF::loadview('cetak.laris', compact('data'));
+        $pdf = PDF::loadview('cetak.tidaklaris', compact('data'));
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('cetak-pesanan-pdf');
     }

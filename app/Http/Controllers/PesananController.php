@@ -138,6 +138,7 @@ class PesananController extends Controller
         $data = Pesanan::find($request->id);
             if($request->bukti){
         $data->bukti = $request->file('bukti')->store('post-image');
+        $data->status = 3;
         }
         $data->update();
 
