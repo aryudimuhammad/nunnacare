@@ -198,9 +198,15 @@ class PesananController extends Controller
     public function ongkiradminpesanan(Request $request)
     {
         $data = Pesanan::where('id', $request->id)->first();
+        if($data->metode_pembayaran == 'COD'){
+            $data->ongkir = $request->ongkir;
+            $data->status = 3;
+            $data->update();
+        }else{
         $data->ongkir = $request->ongkir;
         $data->status = 2;
         $data->update();
+    }
 
         return back()->with('success', 'Ongkir Telah Ditambahkan');
     }

@@ -161,6 +161,10 @@ Cart
     <input id="ovo" name="paymentMethod" type="radio" value="Ovo" class="form-check-input" required>
     <label class="form-check-label" for="Ovo">Ovo</label>
   </div>
+  <div class="form-check">
+    <input id="cod" name="paymentMethod" type="radio" value="COD" class="form-check-input" required>
+    <label class="form-check-label" for="cod">COD</label>
+  </div>
 </div>
 </div>
 
