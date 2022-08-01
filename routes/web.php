@@ -43,7 +43,7 @@ Route::get('/admin/produk', [App\Http\Controllers\produkController::class, 'prod
 Route::delete('/admin/produk/{id}', [App\Http\Controllers\produkController::class, 'deleteproduk'])->name('deleteproduk');
 Route::get('/admin/detailproduk/{id}', [App\Http\Controllers\produkController::class, 'detailproduk'])->name('detailproduk');
 Route::post('/admin/produk', [App\Http\Controllers\produkController::class, 'tambahproduk'])->name('tambahproduk');
-Route::put('/admin/produk', [App2\Http\Controllers\produkController::class, 'editproduk'])->name('editproduk');
+Route::put('/admin/produk', [App\Http\Controllers\produkController::class, 'editproduk'])->name('editproduk');
 Route::get('/admin/produk/cetak', [App\Http\Controllers\cetakController::class, 'cetakproduk'])->name('cetakproduk');
 
 
@@ -64,8 +64,7 @@ Route::get('/admin/courier/cetak/{id}', [App\Http\Controllers\cetakController::c
 Route::get('/admin/supplier', [App\Http\Controllers\supplierController::class, 'supplier'])->name('supplier');
 Route::post('/admin/supplier', [App\Http\Controllers\supplierController::class, 'tambahsupplier'])->name('tambahsupplier');
 Route::delete('/admin/supplier/{id}', [App\Http\Controllers\supplierController::class, 'deletesupplier'])->name('deletesupplier');
-Route::get('/edit/supplier/{id}', [App\Http\Controllers\supplierController::class, 'editsupplier'])->name('editsupplier');
-Route::post('/edit/supplier/{id}', [App\Http\Controllers\supplierController::class, 'aksieditsupplier'])->name('aksieditsupplier');
+Route::put('/admin/supplier', [App\Http\Controllers\supplierController::class, 'aksieditsupplier'])->name('aksieditsupplier');
 Route::get('/detail/supplier/{id}', [App\Http\Controllers\supplierController::class, 'detailsupplier'])->name('detailsupplier');
 Route::post('/detail/supplier/{id}', [App\Http\Controllers\supplierController::class, 'refundsupplier'])->name('refundsupplier');
 Route::get('/admin/supplier/cetak', [App\Http\Controllers\cetakController::class, 'cetaksupplier'])->name('cetaksupplier');

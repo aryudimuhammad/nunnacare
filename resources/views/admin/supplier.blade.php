@@ -48,7 +48,7 @@
                     <td>{{$d->telepon}}</td>
                     <td>{{$d->alamat}}</td>
                     <td><a class="btn btn-xs btn-info text-white" href="{{route('detailsupplier',['id' => $d->id])}}">Lihat Produk</a>
-                    <a class="btn btn-xs btn-warning text-white" href="{{route('editsupplier', ['id' => $d->id])}}" >Edit</a>
+                    <button type="button" class="btn btn-xs btn-warning text-white" data-id="{{$d->id}}" data-nama="{{$d->nama}}" data-alamat="{{$d->alamat}}" data-telepon="{{$d->telepon}}" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
                     <button class="delete btn btn-xs btn-danger" data-id="{{$d->id}}"><i class="fas fa-trash"></i> Hapus</button>
                     </td>
                   </tr>
@@ -69,6 +69,44 @@
 
 
 
+
+
+<!-- editModal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Edit Data</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form method="POST">
+      {{method_field('PUT')}}
+                <div class="modal-body">
+                    @csrf
+                    <div class="form-group">
+                        <label for="nama">Nama Supplier</label>
+                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Produk">
+                        <input type="text" id="id" name="id" hidden>
+                    </div>
+                    <div class="form-group">
+                        <label for="telepon">Nomor Telepon</label>
+                        <input type="text" class="form-control" id="telepon" name="telepon" placeholder="Masukkan Nomor Telepon">
+                    </div>
+                    <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
 
 
 <!-- Modal -->
@@ -173,5 +211,22 @@
       "responsive": true,
     });
   });
+</script>
+
+<script>
+    $('#editModal').on('show.bs.modal', function(event) {
+        let button = $(event.relatedTarget)
+        let id = button.data('id')
+        let nama = button.data('nama')
+        let telepon = button.data('telepon')
+        let alamat = button.data('alamat')
+        let modal = $(this)
+
+        modal.find('.modal-body #id').val(id)
+        modal.find('.modal-body #nama').val(nama)
+        modal.find('.modal-body #telepon').val(telepon)
+        modal.find('.modal-body #telepon').val(telepon)
+        modal.find('.modal-body #alamat').val(alamat)
+    })
 </script>
 @endsection

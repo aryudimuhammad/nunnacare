@@ -31,21 +31,15 @@ class SupplierController extends Controller
 
         return back()->with('success', 'Data Berhasil Dihapus');
     }
-    public function editsupplier(Request $request, $id)
-    {
-        $data = Supplier::find($id);
 
-        return view('admin.supplieredit',compact('data'));
-    }
 
-    public function aksieditsupplier(Request $request, $id)
+    public function aksieditsupplier(Request $request)
     {
         $data = Supplier::where('id',$request->id)->first();
             $data->nama = $request->nama;
             $data->telepon = $request->telepon;
             $data->alamat = $request->alamat;
             $data->update();
-            return back()->with('success', 'Data Berhasil Diubah');
 
             return back()->with('success', 'Data Berhasil Diubah');
     }
