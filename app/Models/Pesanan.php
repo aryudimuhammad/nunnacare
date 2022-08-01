@@ -16,4 +16,8 @@ class Pesanan extends Model
     {
         return $this->BelongsTo(User::class);
     }
+    public function courier()
+    {
+        return $this->BelongsTo(Courier::class);
+    }
 }

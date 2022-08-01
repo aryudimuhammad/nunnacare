@@ -117,7 +117,7 @@
             <td>Jumlah </td>
             <td> : </td>
             <td> @foreach ($data1 as $d)
-            {{$d->jumlah_produk}},
+            {{$d->jumlah_produk}}.
             @endforeach</td>
           </tr>
           <tr>
@@ -133,6 +133,11 @@
             <td> @foreach ($data1 as $d)
            {{$d->produk->kategori->nama_kategori}}.
             @endforeach</td>
+          </tr>
+          <tr>
+            <td>Jasa Pengiriman </td>
+            <td> : </td>
+            <td> {{$data->courier->nama}}</td>
           </tr>
           <tr>
             <td>Metode Pembayaran </td>

@@ -10,6 +10,7 @@ List Pembayaran
             <tr>
             <th scope="col">No.</th>
             <th scope="col">Notransaksi</th>
+            <th scope="col">Jasa Pengiriman</th>
             <th scope="col">Metode Pembayaran</th>
             <th scope="col">Estimasi</th>
             <th scope="col">Status</th>
@@ -20,6 +21,7 @@ List Pembayaran
         <tr>
             <td class="text-center">{{$loop->iteration}}</td>
             <td>{{$d->notransaksi}}</td>
+            <td>{{$d->courier->nama}}</td>
             <td>{{$d->metode_pembayaran}}</td>
             @if ($d->estimasi == null)
             <td>-</td>
@@ -34,14 +36,18 @@ List Pembayaran
             @elseif ($d->status == 3)
             <td><button class="btn btn-sm btn-outline-secondary" disabled>Proses Pengiriman</button></td>
             @elseif ($d->status == 4)
-            <td><button disabled class="btn btn-sm btn-outline-warning">Proses Pengiriman</button></td>
+            <td><button disabled class="btn btn-sm btn-outline-primary">Paket Telah diterima oleh pihak pengiriman</button></td>
+            @elseif ($d->status == 11)
+            <td><button disabled class="btn btn-sm btn-outline-primary">Paket Dalam Proses Pengiriman</button></td>
+            @elseif ($d->status == 12)
+            <td><button disabled class="btn btn-sm btn-outline-primary">Paket Telah Sampai</button></td>
             @endif
 
             @if ($d->status == 1)
             @elseif ($d->status == 2)
             @elseif ($d->status == 3)
             <td><a class="btn btn-sm btn-outline-primary" href="{{route('pembayaran',['id' => Auth()->user()->id ,'idn' => $d->notransaksi])}}">Lihat</i></button></td>
-            @elseif ($d->status == 4)
+            @elseif ($d->status == 4 || 11 || 12 )
             <form action="{{route('diterima',['id' => Auth()->user()->id , 'idn' => $d->notransaksi])}}" method="POST">
                     {{method_field('PUT')}}
                     @csrf

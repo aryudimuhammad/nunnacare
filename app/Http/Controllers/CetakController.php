@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\courier;
 use App\Models\Pesanan;
 use App\Models\Pesanan_detail;
 use App\Models\Produk;
@@ -87,7 +88,8 @@ class CetakController extends Controller
         $data = Pesanan::join('pesanan_details','pesanans.notransaksi', '=' , 'pesanan_details.notransaksi')
                         ->join('produks','pesanan_details.produk_id','=','produks.id')
                         ->join('users','pesanans.user_id','=','users.id')
-                        ->select('produks.nama_barang','users.name','users.telepon','users.alamat','pesanan_details.jumlah_produk','pesanans.notransaksi','pesanans.metode_pembayaran','pesanans.jadwal_pengiriman','pesanans.estimasi')
+                        ->join('couriers','pesanans.courier_id','=','couriers.id')
+                        ->select('produks.nama_barang','users.name','couriers.nama','users.telepon','users.alamat','pesanan_details.jumlah_produk','pesanans.notransaksi','pesanans.metode_pembayaran','pesanans.jadwal_pengiriman','pesanans.estimasi')
                         ->orderBy('pesanans.id','desc')->where('pesanans.status', 4)
                         ->get();
 
@@ -98,14 +100,49 @@ class CetakController extends Controller
         return $pdf->stream('cetak-pesanan-pdf');
     }
 
+    public function cetakpesananprosespengiriman()
+    {
+        $data = Pesanan::join('pesanan_details','pesanans.notransaksi', '=' , 'pesanan_details.notransaksi')
+                        ->join('produks','pesanan_details.produk_id','=','produks.id')
+                        ->join('users','pesanans.user_id','=','users.id')
+                        ->join('couriers','pesanans.courier_id','=','couriers.id')
+                        ->select('produks.nama_barang','users.name','couriers.nama','users.telepon','users.alamat','pesanan_details.jumlah_produk','pesanans.notransaksi','pesanans.metode_pembayaran','pesanans.jadwal_pengiriman','pesanans.estimasi')
+                        ->orderBy('pesanans.id','desc')->where('pesanans.status', 11)
+                        ->get();
+
+
+
+        $pdf = PDF::loadview('cetak.prosespengiriman', compact('data',));
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('cetak-pesanan-pdf');
+    }
+
+    public function cetakpesanantelahsampai()
+    {
+        $data = Pesanan::join('pesanan_details','pesanans.notransaksi', '=' , 'pesanan_details.notransaksi')
+                        ->join('produks','pesanan_details.produk_id','=','produks.id')
+                        ->join('users','pesanans.user_id','=','users.id')
+                        ->join('couriers','pesanans.courier_id','=','couriers.id')
+                        ->select('produks.nama_barang','users.name','couriers.nama','users.telepon','users.alamat','pesanan_details.jumlah_produk','pesanans.notransaksi','pesanans.metode_pembayaran','pesanans.jadwal_pengiriman','pesanans.estimasi')
+                        ->orderBy('pesanans.id','desc')->where('pesanans.status', 12)
+                        ->get();
+
+
+
+        $pdf = PDF::loadview('cetak.telahsampai', compact('data',));
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('cetak-pesanan-pdf');
+    }
+
     public function cetakpesananditerima()
     {
 
         $data = Pesanan::join('pesanan_details','pesanans.notransaksi', '=' , 'pesanan_details.notransaksi')
                         ->join('produks','pesanan_details.produk_id','=','produks.id')
                         ->join('users','pesanans.user_id','=','users.id')
-                        ->select('pesanans.status','produks.nama_barang','users.name','users.telepon','users.alamat','pesanan_details.jumlah_produk','pesanans.notransaksi','pesanans.metode_pembayaran','pesanans.jadwal_pengiriman','pesanans.estimasi')
-                        ->orderBy('pesanans.id','desc')->where('pesanans.status', 5)
+                        ->join('couriers','pesanans.courier_id','=','couriers.id')
+                        ->select('pesanans.status','produks.nama_barang','couriers.nama','users.name','users.telepon','users.alamat','pesanan_details.jumlah_produk','pesanans.notransaksi','pesanans.metode_pembayaran','pesanans.jadwal_pengiriman','pesanans.estimasi')
+                        ->orderBy('pesanans.id','desc')->where('pesanans.status', 13)
                         ->get();
 
 
@@ -122,7 +159,7 @@ class CetakController extends Controller
                         ->join('produks','pesanan_details.produk_id','=','produks.id')
                         ->join('kategoris','produks.kategori_id','=','kategoris.id')
                         ->select('produks.nama_barang','pesanan_details.jumlah_produk','pesanans.notransaksi','kategoris.nama_kategori','pesanans.updated_at','produks.harga')
-                        ->orderBy('pesanans.id','desc')->where('pesanans.status', 5)->where('pesanan_details.jumlah_produk','>=', 2)
+                        ->orderBy('pesanans.id','desc')->where('pesanans.status', 13)->where('pesanan_details.jumlah_produk','>=', 2)
                         ->get();
 
 
@@ -139,7 +176,7 @@ class CetakController extends Controller
                         ->join('produks','pesanan_details.produk_id','=','produks.id')
                         ->join('kategoris','produks.kategori_id','=','kategoris.id')
                         ->select('produks.nama_barang','pesanan_details.jumlah_produk','pesanans.notransaksi','kategoris.nama_kategori','pesanans.updated_at','produks.harga')
-                        ->orderBy('pesanans.id','desc')->where('pesanans.status', 5)->where('pesanan_details.jumlah_produk','<=', 2)
+                        ->orderBy('pesanans.id','desc')->where('pesanans.status', 13)->where('pesanan_details.jumlah_produk','<=', 2)
                         ->get();
 
 
@@ -155,7 +192,7 @@ class CetakController extends Controller
                         ->join('produks','pesanan_details.produk_id','=','produks.id')
                         ->join('users','pesanan_details.user_id','=','users.id')
                         ->select('produks.nama_barang','pesanans.metode_pembayaran','pesanans.jadwal_pengiriman','pesanan_details.jumlah_produk','pesanans.notransaksi','pesanans.updated_at','users.name','users.alamat','users.telepon')
-                        ->orderBy('pesanans.id','desc')->where('pesanans.status', 5)
+                        ->orderBy('pesanans.id','desc')->where('pesanans.status', 13)
                         ->get();
 
         $pdf = PDF::loadview('cetak.transaksi', compact('data'));
@@ -183,6 +220,32 @@ class CetakController extends Controller
 
         $pdf = PDF::loadview('cetak.cart', compact('data','data1'));
         $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('cetak-user-pdf');
+    }
+
+    public function cetakcourier(Request $request)
+    {
+    	$data = courier::orderby('id','asc')->get();
+
+
+        $pdf = PDF::loadview('cetak.courier', compact('data'));
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('cetak-user-pdf');
+    }
+
+    public function cetakcourier1($id)
+    {
+        $data = Pesanan::join('pesanan_details','pesanans.notransaksi', '=' , 'pesanan_details.notransaksi')
+                        ->join('produks','pesanan_details.produk_id','=','produks.id')
+                        ->join('users','pesanans.user_id','=','users.id')
+                        ->join('couriers','pesanans.courier_id','=','couriers.id')
+                        ->select('pesanans.status','produks.nama_barang','couriers.nama','users.name','users.telepon','users.alamat','pesanan_details.jumlah_produk','pesanans.notransaksi','pesanans.metode_pembayaran','pesanans.jadwal_pengiriman','pesanans.estimasi')
+                        ->orderBy('pesanans.id','desc')->where('courier_id',$id)
+                        ->get();
+        $courier = courier::where('id',$id)->first();
+
+        $pdf = PDF::loadview('cetak.couriersatuan', compact('data','courier'));
+        $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('cetak-user-pdf');
     }
 }

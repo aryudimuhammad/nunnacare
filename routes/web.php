@@ -54,6 +54,12 @@ Route::delete('/admin/user/{id}', [App\Http\Controllers\userController::class, '
 Route::get('/admin/user/cetak', [App\Http\Controllers\cetakController::class, 'usercetak'])->name('usercetak');
 Route::get('/admin/user/cetaksatuan/{id}', [App\Http\Controllers\cetakController::class, 'usercetak1'])->name('usercetak1');
 
+Route::get('/admin/courier', [App\Http\Controllers\courierController::class, 'courier'])->name('courier');
+Route::post('/admin/courier', [App\Http\Controllers\courierController::class, 'couriertambah'])->name('couriertambah');
+Route::put('/admin/courier', [App\Http\Controllers\courierController::class, 'courieredit'])->name('courieredit');
+Route::delete('/admin/courier/{id}', [App\Http\Controllers\courierController::class, 'courierdelete'])->name('courierdelete');
+Route::get('/admin/courier/cetak', [App\Http\Controllers\cetakController::class, 'cetakcourier'])->name('cetakcourier');
+Route::get('/admin/courier/cetak/{id}', [App\Http\Controllers\cetakController::class, 'cetakcourier1'])->name('cetakcourier1');
 
 Route::get('/admin/supplier', [App\Http\Controllers\supplierController::class, 'supplier'])->name('supplier');
 Route::post('/admin/supplier', [App\Http\Controllers\supplierController::class, 'tambahsupplier'])->name('tambahsupplier');
@@ -68,10 +74,13 @@ Route::get('/admin/supplier/cetak1/{id}', [App\Http\Controllers\cetakController:
 
 Route::get('/admin/pesanan', [App\Http\Controllers\pesananController::class, 'adminpesanan'])->name('adminpesanan');
 Route::post('/admin/pesanan/ongkir', [App\Http\Controllers\pesananController::class, 'ongkiradminpesanan'])->name('ongkiradminpesanan');
+Route::post('/admin/pesanan/statuspengiriman', [App\Http\Controllers\pesananController::class, 'statuspengiriman'])->name('statuspengiriman');
 Route::post('/admin/pesanan', [App\Http\Controllers\pesananController::class, 'estimasiadminpesanan'])->name('estimasiadminpesanan');
 Route::delete('/admin/pesanan/delete/{id}', [App\Http\Controllers\pesananController::class, 'adminpesanandelete'])->name('adminpesanandelete');
 Route::get('/admin/pesanan/detail/{id}/{idu}', [App\Http\Controllers\pesananController::class, 'adminpesanandetail'])->name('adminpesanandetail');
 Route::get('/admin/pesanan/cetakkiriman', [App\Http\Controllers\cetakController::class, 'cetakpesanankiriman'])->name('cetakpesanankiriman');
+Route::get('/admin/pesanan/cetakprosespengiriman', [App\Http\Controllers\cetakController::class, 'cetakpesananprosespengiriman'])->name('cetakpesananprosespengiriman');
+Route::get('/admin/pesanan/cetaktelahsampai', [App\Http\Controllers\cetakController::class, 'cetakpesanantelahsampai'])->name('cetakpesanantelahsampai');
 Route::get('/admin/pesanan/cetakkirimanditerima', [App\Http\Controllers\cetakController::class, 'cetakpesananditerima'])->name('cetakpesananditerima');
 Route::get('/admin/pesanan/cetakbaranglaris', [App\Http\Controllers\cetakController::class, 'cetakbaranglaris'])->name('cetakbaranglaris');
 Route::get('/admin/pesanan/cetakbarangtidaklaris', [App\Http\Controllers\cetakController::class, 'cetakbarangtidaklaris'])->name('cetakbarangtidaklaris');

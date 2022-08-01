@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('courier_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('notransaksi')->nullable();
             $table->string('metode_pembayaran')->nullable();
@@ -22,7 +23,9 @@ return new class extends Migration
             $table->integer('status')->nullable();
             $table->string('ongkir')->nullable();
             $table->string('bukti')->nullable();
+            $table->string('nama_courier')->nullable();
             $table->string('jadwal_pengiriman')->nullable();
+            $table->foreign('courier_id')->references('id')->on('couriers')->onDelete('restrict');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
             $table->timestamps();
         });

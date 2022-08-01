@@ -147,6 +147,15 @@ Cart
 
 
 <div class="py-5 col">
+<h4 class="mb-3">Jasa Pengiriman</h4>
+<div class="form-group">
+    <select class="form-select" name="jasa" id="jasa" aria-label="Default select example">
+    @foreach ($jasa as $d)
+    <option value="{{$d->id}}">{{$d->nama}}</option>
+    @endforeach
+    </select>
+</div>
+<br>
 <h4 class="mb-3">Metode Pembayaran</h4>
 <div class="my-3">
   <div class="form-check">
@@ -167,6 +176,8 @@ Cart
   </div>
 </div>
 </div>
+
+
 
 <hr class="my-4">
 <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>

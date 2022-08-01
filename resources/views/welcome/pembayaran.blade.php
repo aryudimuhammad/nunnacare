@@ -239,22 +239,27 @@ Pembayaran
             <td>Jumlah </td>
             <td> : </td>
             <td> @foreach ($data2 as $d)
-            {{$d->produk->nama_barang}} : {{$d->jumlah_produk}} ,
+           {{$d->jumlah_produk}}.
             @endforeach</td>
           </tr>
           <tr>
             <td>Harga </td>
             <td> : </td>
             <td> @foreach ($data2 as $d)
-                {{$d->produk->nama_barang}} : Rp.{{number_format($d->produk->harga, 0, ',', '.') }} .
+               Rp.{{number_format($d->produk->harga, 0, ',', '.') }}.
             @endforeach</td>
           </tr>
           <tr>
             <td>Jenis Produk </td>
             <td> : </td>
             <td> @foreach ($data2 as $d)
-            {{$d->produk->nama_barang}} : {{$d->produk->kategori->nama_kategori}} .
+           {{$d->produk->kategori->nama_kategori}}.
             @endforeach</td>
+          </tr>
+          <tr>
+            <td>Jasa Pengiriman </td>
+            <td> : </td>
+            <td> {{$data1->courier->nama}}</td>
           </tr>
           <tr>
             <td>Metode Pembayaran </td>

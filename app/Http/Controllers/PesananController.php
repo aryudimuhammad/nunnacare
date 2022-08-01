@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\courier;
 use App\Models\Kategori;
 use App\Models\Pesanan;
 use App\Models\Pesanan_detail;
@@ -18,6 +19,7 @@ class PesananController extends Controller
         $kategori = Kategori::orderBy('id', 'desc')->get();
         $data = Produk::where('id', $request->produk_id)->first();
         $date = Carbon::now()->format('mdhis');
+        $jasa = courier::orderBy('id','desc')->get();
 
 
         $result = Pesanan_detail::where('produk_id', $request->produk_id)->where('user_id', $id)->whereNull('status')->first();
@@ -54,7 +56,7 @@ class PesananController extends Controller
 
         $data2 = Pesanan_detail::where('user_id', $id)->whereNull('notransaksi')->first();
 
-        return view('welcome.cart', compact('data','kategori','result','data1','data2','date'));
+        return view('welcome.cart', compact('data','kategori','result','data1','data2','date','jasa'));
     }
 
     public function cartjumlah(Request $request , $id)
@@ -81,7 +83,7 @@ class PesananController extends Controller
     public function pembayaranlist(Request $request , $id)
     {
         $kategori = Kategori::orderBy('id', 'desc')->get();
-        $data = Pesanan::orderby('id', 'desc')->where('status' , '<' , 5)->where('user_id', Auth()->user()->id)->get();
+        $data = Pesanan::orderby('id', 'desc')->where('status' , '<' , 13)->where('user_id', Auth()->user()->id)->get();
 
         return view('welcome.pembayaranlist', compact('data','kategori'));
     }
@@ -120,6 +122,7 @@ class PesananController extends Controller
                 $notransaksi->user_id = $id;
                 $notransaksi->notransaksi = $date . $id;
                 $notransaksi->metode_pembayaran = $request->paymentMethod;
+                $notransaksi->courier_id = $request->jasa;
                 $notransaksi->status = 1;
                 $notransaksi->save();
             }
@@ -156,7 +159,7 @@ class PesananController extends Controller
     public function diterima(Request $request)
     {
         $data = Pesanan::where('notransaksi',$request->notransaksi)->first();
-        $data->status = 5;
+        $data->status = 13;
         $data->update();
 
         Pesanan_detail::where('notransaksi',$request->notransaksi)->where('status', 2)->update(['status' => 5]);
@@ -211,16 +214,28 @@ class PesananController extends Controller
         return back()->with('success', 'Ongkir Telah Ditambahkan');
     }
 
+
     public function estimasiadminpesanan(Request $request)
     {
         $date = Carbon::now()->format('Y-m-d');
 
         $data = Pesanan::find($request->id);
         $data->estimasi = $request->estimasi;
+        $data->nama_courier = $request->nama_courier;
         $data->jadwal_pengiriman = $date;
         $data->status = 4;
         $data->update();
 
         return back()->with('success','Data Berhasil Disimpan.');
+    }
+
+
+    public function statuspengiriman(Request $request)
+    {
+        $data = Pesanan::where('id', $request->id)->first();
+        $data->status = $request->statuspengiriman;
+        $data->update();
+
+        return back()->with('success', 'Status Telah Diubah.');
     }
 }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cetak Data Pesanan yang Telah Diterima</title>
+    <title>Cetak Data Pesanan Dalam Proses Pengiriman</title>
     <link rel="icon" type="image/png" href="{{url('img/logo.png')}}">
     <style>
         .logo {
@@ -82,7 +82,7 @@
             <img class="sizeimg" src="logo/logo.jpg">
         </div>
         <div class="headtext">
-            <h1 style="margin:0px;">Data Pesanan yang Telah Diterima</h1>
+            <h1 style="margin:0px;">Data Pesanan Dalam Proses Pengiriman</h1>
             <h2 style="margin:0px;">Nunnacare Penjualan Dan Pemesanan Skincare dan Kosmetik</h2>
             <h4 style="margin:0px;">Jl. Guntung Harapan
             </h4>
@@ -91,7 +91,7 @@
     </div>
 
     <div class="container" style="margin-top:-40px;">
-        <h3 style="text-align:center;text-transform: uppercase;">Laporan Data Pesanan yang Telah Diterima</h3>
+        <h3 style="text-align:center;text-transform: uppercase;">Laporan Data Pesanan Dalam Proses Pengiriman</h3>
         <table class='table table-bordered nowrap'>
             <thead>
                 <tr>

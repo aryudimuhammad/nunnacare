@@ -30,7 +30,9 @@
                 <a style="float: right; margin-left: 8px;" href="{{route('cetakbarangtransaksi')}}" class="btn btn-sm btn-outline-info">Transaksi</a>
                 <a style="float: right; margin-left: 8px;" href="{{route('cetakbarangtidaklaris')}}" class="btn btn-sm btn-outline-info">Barang Kurang Laris</a>
                 <a style="float: right; margin-left: 8px;" href="{{route('cetakbaranglaris')}}" class="btn btn-sm btn-outline-info">Barang Laris</a>
-                <a style="float: right; margin-left: 8px;" href="{{route('cetakpesanankiriman')}}" class="btn btn-sm btn-outline-info">Pesanan Dikirim</a>
+                <a style="float: right; margin-left: 8px;" href="{{route('cetakpesanankiriman')}}" class="btn btn-sm btn-outline-info">Paket Telah Diterima</a>
+                <a style="float: right; margin-left: 8px;" href="{{route('cetakpesananprosespengiriman')}}" class="btn btn-sm btn-outline-info">Dalam Pengiriman</a>
+                <a style="float: right; margin-left: 8px;" href="{{route('cetakpesanantelahsampai')}}" class="btn btn-sm btn-outline-info">Telah Sampai</a>
                 <a style="float: right; margin-left: 8px;" href="{{route('cetakpesananditerima')}}" class="btn btn-sm btn-outline-info">Pesanan Diterima</a>
               </div>
               <!-- /.card-header -->
@@ -42,6 +44,7 @@
                     <th>Customer</th>
                     <th>Notransaksi</th>
                     <th>Metode</th>
+                    <th>Jasa</th>
                     <th>Status</th>
                     <th>Ongkir</th>
                     <th>Bukti</th>
@@ -55,6 +58,7 @@
                     <td>{{$d->user->name}}</td>
                     <td>{{$d->notransaksi}}</td>
                     <td>{{$d->metode_pembayaran}}</td>
+                    <td>{{$d->courier->nama}}</td>
                     @if ($d->status == 1)
                     <td> <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#closeModal">Verifikasi</button></td>
                     @elseif ($d->status == 2)
@@ -62,7 +66,11 @@
                     @elseif ($d->status == 3)
                     <td><button class="btn btn-sm btn-outline-danger" data-id="{{$d->id}}" data-bs-toggle="modal" data-bs-target="#ongkirModal">Barang Perlu Dikirim</button></td>
                     @elseif ($d->status == 4)
-                    <td><button class="btn btn-sm btn-outline-info">Proses Dikirim</button></td>
+                    <td><button class="btn btn-sm btn-outline-info" data-id="{{$d->id}}" data-bs-toggle="modal" data-bs-target="#statuspengirimanModal">Paket Telah diterima oleh pihak pengiriman</button></td>
+                    @elseif ($d->status == 11)
+                    <td><button class="btn btn-sm btn-outline-info" data-id="{{$d->id}}" data-bs-toggle="modal" data-bs-target="#statuspengirimanModal">Paket Dalam Proses Pengiriman</button></td>
+                    @elseif ($d->status == 12)
+                    <td><button class="btn btn-sm btn-outline-info">Paket Telah Sampai</button></td>
                     @else
                     <td><button class="btn btn-sm btn-secondary">Terjual</button></td>
                     @endif
@@ -179,6 +187,38 @@
   </div>
 </div>
 
+<!-- statuspengiriman -->
+<div class="modal fade" id="statuspengirimanModal" tabindex="-1" aria-labelledby="statuspengirimanModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="statuspengirimanModalLabel">Status Pengiriman</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form method="POST" action="{{route('statuspengiriman')}}">
+                <div class="modal-body">
+                    @csrf
+                    <input type="text" hidden id="id" name="id">
+                    <div class="form-group">
+                        <label for="statuspengiriman">Stataus</label>
+                        <select class="form-select" name="statuspengiriman" id="statuspengiriman" aria-label="Default select example">
+                        <option value="11">Paket Dalam Proses Pengiriman</option>
+                        <option value="12">Paket Telah Sampai</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
 <!-- estimasi -->
 <div class="modal fade" id="ongkirModal" tabindex="-1" aria-labelledby="ongkirModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -196,7 +236,12 @@
                         <label for="estimasi">Estimasi</label>
                         <input type="text" class="form-control" id="estimasi" name="estimasi" placeholder="Masukkan Estimasi Pengiriman" value="{{old('estimasi')}}">
                     </div>
+                    <div class="form-group">
+                        <label for="nama_courier">Nama Courier</label>
+                        <input type="text" class="form-control" id="nama_courier" name="nama_courier" placeholder="Masukkan Estimasi Pengiriman" value="{{old('nama_courier')}}">
+                    </div>
                 </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -255,6 +300,8 @@
     </div>
     </div>
 </div>
+
+
 @endsection
 @section('script')
 
@@ -339,6 +386,16 @@
 
 <script>
     $('#ongkirModal').on('show.bs.modal', function(event) {
+        let button = $(event.relatedTarget)
+        let id = button.data('id')
+        let modal = $(this)
+
+        modal.find('.modal-body #id').val(id)
+    })
+</script>
+
+<script>
+    $('#statuspengirimanModal').on('show.bs.modal', function(event) {
         let button = $(event.relatedTarget)
         let id = button.data('id')
         let modal = $(this)
