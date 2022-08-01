@@ -93,17 +93,18 @@ class PesananController extends Controller
 
         $data1 = Pesanan::where('notransaksi', $idn)->first();
         $data2 = Pesanan_detail::where('notransaksi', $idn)->get();
-        $data3 = Pesanan_detail::where('notransaksi', $idn)->first();
         $data2->map(function($item){
             $harga = $item->produk->harga;
             $jumlah = $item->jumlah_produk;
 
             $item['harga'] = $harga * $jumlah;
+            $item['jumlah'] = $jumlah;
 
             return $item;
         });
 
-        return view('welcome.pembayaran', compact('kategori','data1','data2','data3'));
+
+        return view('welcome.pembayaran', compact('kategori','data1','data2'));
     }
 
     public function pembayaran1(Request $request, $id){

@@ -18,7 +18,15 @@ class CetakController extends Controller
     {
     	$data = Pesanan::where('notransaksi',$request->notransaksi)->first();
     	$data1 = Pesanan_detail::where('notransaksi',$request->notransaksi)->get();
+        $data1->map(function($item){
+            $harga = $item->produk->harga;
+            $jumlah = $item->jumlah_produk;
 
+            $item['harga'] = $harga * $jumlah;
+            $item['jumlah'] = $jumlah;
+
+            return $item;
+        });
 
         $pdf = PDF::loadview('cetak.nota', compact('data','data1'));
         $pdf->setPaper('a4', 'landscape');

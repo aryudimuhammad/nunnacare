@@ -116,16 +116,12 @@
           <tr>
             <td>Jumlah </td>
             <td> : </td>
-            <td> @foreach ($data1 as $d)
-            {{$d->jumlah_produk}}.
-            @endforeach</td>
+            <td> {{$data1->sum('jumlah')}} Qty</td>
           </tr>
           <tr>
             <td>Harga </td>
             <td> : </td>
-            <td> @foreach ($data1 as $d)
-               Rp.{{number_format($d->produk->harga, 0, ',', '.') }}.
-            @endforeach</td>
+            <td>Rp{{number_format($data1->sum('harga'), 0, ',', '.') }},-</td>
           </tr>
           <tr>
             <td>Jenis Produk </td>
