@@ -33,7 +33,7 @@
                 <a style="float: right; margin-left: 8px;" href="{{route('cetakpesanankiriman')}}" class="btn btn-sm btn-outline-info">Paket Telah Diterima</a>
                 <a style="float: right; margin-left: 8px;" href="{{route('cetakpesananprosespengiriman')}}" class="btn btn-sm btn-outline-info">Dalam Pengiriman</a>
                 <a style="float: right; margin-left: 8px;" href="{{route('cetakpesanantelahsampai')}}" class="btn btn-sm btn-outline-info">Telah Sampai</a>
-                <a style="float: right; margin-left: 8px;" href="{{route('cetakpesananditerima')}}" class="btn btn-sm btn-outline-info">Pesanan Diterima</a>
+                <a style="float: right; margin-left: 8px;" href="{{route('cetakpesananditerima')}}" class="btn btn-sm btn-outline-info">Terjual</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -201,7 +201,7 @@
                     @csrf
                     <input type="text" hidden id="id" name="id">
                     <div class="form-group">
-                        <label for="statuspengiriman">Stataus</label>
+                        <label for="statuspengiriman">Status</label>
                         <select class="form-select" name="statuspengiriman" id="statuspengiriman" aria-label="Default select example">
                         <option value="11">Paket Dalam Proses Pengiriman</option>
                         <option value="12">Paket Telah Sampai</option>

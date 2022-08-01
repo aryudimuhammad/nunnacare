@@ -47,7 +47,7 @@ List Pembayaran
             @elseif ($d->status == 2)
             @elseif ($d->status == 3)
             <td><a class="btn btn-sm btn-outline-primary" href="{{route('pembayaran',['id' => Auth()->user()->id ,'idn' => $d->notransaksi])}}">Lihat</i></button></td>
-            @elseif ($d->status == 4 || 11 || 12 )
+            @elseif ($d->status == 12 )
             <form action="{{route('diterima',['id' => Auth()->user()->id , 'idn' => $d->notransaksi])}}" method="POST">
                     {{method_field('PUT')}}
                     @csrf
