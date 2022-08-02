@@ -25,7 +25,7 @@
       <div class="container-fluid">
             <div class="card">
               <div class="card-header">
-                <a style="float: right;" href="{{route('usercetak')}}" class="btn btn-outline-info btn-sm">Cetak</a>
+                <a style="float: right;" href="{{route('usercetak')}}" target="_blank" class="btn btn-outline-info btn-sm">Cetak</a>
                 <button style="float: right; margin-right:6px;"  data-bs-toggle="modal" data-bs-target="#tambahModal" class="btn btn-outline-primary btn-sm">Tambah Data</button>
               </div>
               <!-- /.card-header -->
@@ -58,7 +58,7 @@
                     <td>
                     <button type="button" class="btn btn-xs btn-warning text-white" data-id="{{$d->id}}" data-email="{{$d->email}}" data-name="{{$d->name}}" data-alamat="{{$d->alamat}}" data-telepon="{{$d->telepon}}" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
                     <button class="delete btn btn-xs btn-danger" data-id="{{$d->id}}"><i class="fas fa-trash"></i> Hapus</button>
-                    <a href="{{route('usercetak1',['id' => $d->id])}}"  class="btn btn-info btn-xs text-white">Cetak</a>
+                    <a target="_blank" href="{{route('usercetak1',['id' => $d->id])}}"  class="btn btn-info btn-xs text-white">Cetak</a>
                   </tr>
                 @endforeach
                   </tbody>

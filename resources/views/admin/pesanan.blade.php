@@ -26,14 +26,14 @@
             <div class="card">
               <div class="card-header">
                 <!-- <a style="float: right; margin-left: 8px;" href="{{route('cetakkeuangan')}}" class="btn btn-sm btn-outline-info">Keuangan</a> -->
-                <button style="float: right; margin-left: 8px;" data-bs-toggle="modal" data-bs-target="#cetakModal" href="{{route('cetakkeuangan')}}" class="btn btn-sm btn-outline-info">Keuangan</button>
-                <a style="float: right; margin-left: 8px;" href="{{route('cetakbarangtransaksi')}}" class="btn btn-sm btn-outline-info">Transaksi</a>
-                <a style="float: right; margin-left: 8px;" href="{{route('cetakbarangtidaklaris')}}" class="btn btn-sm btn-outline-info">Barang Kurang Laris</a>
-                <a style="float: right; margin-left: 8px;" href="{{route('cetakbaranglaris')}}" class="btn btn-sm btn-outline-info">Barang Laris</a>
-                <a style="float: right; margin-left: 8px;" href="{{route('cetakpesanankiriman')}}" class="btn btn-sm btn-outline-info">Diterima Oleh Pihak Pengiriman</a>
-                <a style="float: right; margin-left: 8px;" href="{{route('cetakpesananprosespengiriman')}}" class="btn btn-sm btn-outline-info">Dalam Pengiriman</a>
-                <a style="float: right; margin-left: 8px;" href="{{route('cetakpesanantelahsampai')}}" class="btn btn-sm btn-outline-info">Telah Sampai</a>
-                <a style="float: right; margin-left: 8px;" href="{{route('cetakpesananditerima')}}" class="btn btn-sm btn-outline-info">Terjual</a>
+                <button style="float: right; margin-left: 8px;" data-bs-toggle="modal" data-bs-target="#cetakModal" href="{{route('cetakkeuangan')}}" target="_blank" class="btn btn-sm btn-outline-info">Keuangan</button>
+                <a style="float: right; margin-left: 8px;" href="{{route('cetakbarangtransaksi')}}" target="_blank" class="btn btn-sm btn-outline-info">Transaksi</a>
+                <a style="float: right; margin-left: 8px;" href="{{route('cetakbarangtidaklaris')}}" target="_blank" class="btn btn-sm btn-outline-info">Barang Kurang Laris</a>
+                <a style="float: right; margin-left: 8px;" href="{{route('cetakbaranglaris')}}" target="_blank" class="btn btn-sm btn-outline-info">Barang Laris</a>
+                <a style="float: right; margin-left: 8px;" href="{{route('cetakpesanankiriman')}}" target="_blank" class="btn btn-sm btn-outline-info">Diterima Oleh Pihak Pengiriman</a>
+                <a style="float: right; margin-left: 8px;" href="{{route('cetakpesananprosespengiriman')}}" target="_blank" class="btn btn-sm btn-outline-info">Dalam Pengiriman</a>
+                <a style="float: right; margin-left: 8px;" href="{{route('cetakpesanantelahsampai')}}" target="_blank" class="btn btn-sm btn-outline-info">Telah Sampai</a>
+                <a style="float: right; margin-left: 8px;" href="{{route('cetakpesananditerima')}}" target="_blank" class="btn btn-sm btn-outline-info">Terjual</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -90,7 +90,7 @@
                     @endif
 
                     <td>
-                        <a href="{{route('cetakcart',['id' => $d->notransaksi , 'idu' => $d->user_id])}}" class="btn btn-xs btn-warning text-white">Cetak</a>
+                        <a href="{{route('cetakcart',['id' => $d->notransaksi , 'idu' => $d->user_id])}}" target="_blank" class="btn btn-xs btn-warning text-white">Cetak</a>
                         <form action="{{route('adminpesanandetail',['id' => $d->notransaksi , 'idu' => $d->user_id])}}">
                         <button type="submit" class="btn btn-xs btn-info">Detail</button>
                         </form>

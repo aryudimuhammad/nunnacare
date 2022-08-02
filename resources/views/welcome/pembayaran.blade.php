@@ -278,7 +278,7 @@ Pembayaran
         <div class="notice"><b>Note :</b><small> Apabila Barang Rusak Karena Proses Pengiriman diluar tanggung jawab kami.</small></div>
       </div>
 </div>
-<form method="get" action="{{route('nota')}}">
+<form method="get" target="_blank" action="{{route('nota')}}">
     <input type="text" value="{{$data1->notransaksi}}" hidden name="notransaksi">
 <button type="submit" class="btn btn-primary" style="float:right;">Cetak</button>
 </form>

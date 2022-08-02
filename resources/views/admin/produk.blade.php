@@ -24,7 +24,7 @@
       <div class="container-fluid">
             <div class="card">
               <div class="card-header">
-              <a style="float: right;" href="{{route('cetakproduk')}}"  class="btn btn-outline-info btn-sm">Cetak</a>
+              <a style="float: right;" href="{{route('cetakproduk')}}" target="_blank"  class="btn btn-outline-info btn-sm">Cetak</a>
 <button type="button" style="float: right; margin-right:6px;" class="btn btn-sm btn-outline-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal">
   Tambah Data
 </button>
