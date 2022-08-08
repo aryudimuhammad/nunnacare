@@ -88,6 +88,17 @@ class PesananController extends Controller
         return view('welcome.pembayaranlist', compact('data','kategori'));
     }
 
+    public function pembayaranlistdelete(Request $request ,$id)
+    {
+        $data = Pesanan::where('notransaksi', $request->notransaksi)->first();
+        $data->delete();
+
+        $detail = Pesanan_detail::where('notransaksi',$request->notransaksi)->first();
+        $detail->delete();
+
+        return back()->with('success', 'Pembelian berhasil di Cancel');
+    }
+
     public function pembayaran(Request $request, $id ,$idn){
         $kategori = Kategori::orderBy('id', 'desc')->get();
 

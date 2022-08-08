@@ -27,6 +27,7 @@ Route::post('/cart/{id}', [App\Http\Controllers\pesananController::class, 'cart'
 Route::put('/cart/{id}', [App\Http\Controllers\pesananController::class, 'cartjumlah'])->name('cartjumlah');
 Route::delete('/cart/delete/{id}', [App\Http\Controllers\pesananController::class, 'cartdelete'])->name('cartdelete');
 Route::get('/pembayaranlist/{id}', [App\Http\Controllers\pesananController::class, 'pembayaranlist'])->name('pembayaranlist');
+Route::delete('/pembayaranlist/{id}', [App\Http\Controllers\pesananController::class, 'pembayaranlistdelete'])->name('pembayaranlistdelete');
 Route::get('/pembayaran/{id}/{idn}', [App\Http\Controllers\pesananController::class, 'pembayaran'])->name('pembayaran');
 Route::get('/pembayaran1/{id}', [App\Http\Controllers\pesananController::class, 'pembayaran1'])->name('pembayaran1');
 Route::post('/pembayaran/{id}/{idn}', [App\Http\Controllers\pesananController::class, 'buktipembayaran'])->name('buktipembayaran');

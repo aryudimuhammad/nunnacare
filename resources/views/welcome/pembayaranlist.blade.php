@@ -44,7 +44,23 @@ List Pembayaran
             @endif
 
             @if ($d->status == 1)
+            <td>
+                <form action="{{route('pembayaranlistdelete',['id' => Auth()->user()->id])}}" method="POST">
+                    {{method_field('DELETE')}}
+                    @csrf
+                <input type="text" value="{{$d->notransaksi}}" name="notransaksi" hidden id="notransaksi">
+                <button type="submit" class="btn btn-sm btn-outline-danger">Cancel</button>
+                </form>
+            </td>
             @elseif ($d->status == 2)
+            <td>
+                <form action="{{route('pembayaranlistdelete',['id' => Auth()->user()->id])}}" method="POST">
+                    {{method_field('DELETE')}}
+                    @csrf
+                <input type="text" value="{{$d->notransaksi}}" name="notransaksi" hidden id="notransaksi">
+                <button type="submit" class="btn btn-sm btn-outline-danger">Cancel</button>
+                </form>
+            </td>
             @elseif ($d->status == 3)
             <td><a class="btn btn-sm btn-outline-primary" href="{{route('pembayaran',['id' => Auth()->user()->id ,'idn' => $d->notransaksi])}}">Lihat</i></button></td>
             @elseif ($d->status == 12 )
