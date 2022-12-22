@@ -54,6 +54,8 @@
                     <td>Customer</td>
                     @elseif ($d->role == 1)
                     <td>Admin</td>
+                    @elseif ($d->role == 3)
+                    <td>Courier</td>
                     @endif
                     <td>
                     <button type="button" class="btn btn-xs btn-warning text-white" data-id="{{$d->id}}" data-email="{{$d->email}}" data-name="{{$d->name}}" data-alamat="{{$d->alamat}}" data-telepon="{{$d->telepon}}" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>

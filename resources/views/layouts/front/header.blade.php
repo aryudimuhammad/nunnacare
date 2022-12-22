@@ -80,6 +80,10 @@
                             <a class="dropdown-item" href="{{ route('dashboard') }}">
                                 Dashboard Admin
                             </a>
+                            @elseif (@auth()->user()->role == 3)
+                            <a class="dropdown-item" href="{{ route('dashboard') }}">
+                                Dashboard Kurir
+                            </a>
                             @else
                             @endif
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

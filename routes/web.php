@@ -89,5 +89,28 @@ Route::get('/admin/pesanan/cetakcart/{id}/{idu}', [App\Http\Controllers\cetakCon
 Route::get('/admin/pesanan/cetakkeuangan', [App\Http\Controllers\cetakController::class, 'cetakkeuangan'])->name('cetakkeuangan');
 });
 
+Route::group(['middleware' => ['auth', 'Checkrole:1,3']], function ()
+{
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+Route::get('/admin/dashboard', [App\Http\Controllers\produkController::class, 'dashboard'])->name('dashboard');
+Route::get('/admin/sidebar', [App\Http\Controllers\PesananController::class, 'total'])->name('total');
+
+Route::get('/admin/pesanan', [App\Http\Controllers\pesananController::class, 'adminpesanan'])->name('adminpesanan');
+Route::post('/admin/pesanan/ongkir', [App\Http\Controllers\pesananController::class, 'ongkiradminpesanan'])->name('ongkiradminpesanan');
+Route::post('/admin/pesanan/statuspengiriman', [App\Http\Controllers\pesananController::class, 'statuspengiriman'])->name('statuspengiriman');
+Route::post('/admin/pesanan', [App\Http\Controllers\pesananController::class, 'estimasiadminpesanan'])->name('estimasiadminpesanan');
+Route::delete('/admin/pesanan/delete/{id}', [App\Http\Controllers\pesananController::class, 'adminpesanandelete'])->name('adminpesanandelete');
+Route::get('/admin/pesanan/detail/{id}/{idu}', [App\Http\Controllers\pesananController::class, 'adminpesanandetail'])->name('adminpesanandetail');
+Route::get('/admin/pesanan/cetakkiriman', [App\Http\Controllers\cetakController::class, 'cetakpesanankiriman'])->name('cetakpesanankiriman');
+Route::get('/admin/pesanan/cetakprosespengiriman', [App\Http\Controllers\cetakController::class, 'cetakpesananprosespengiriman'])->name('cetakpesananprosespengiriman');
+Route::get('/admin/pesanan/cetaktelahsampai', [App\Http\Controllers\cetakController::class, 'cetakpesanantelahsampai'])->name('cetakpesanantelahsampai');
+Route::get('/admin/pesanan/cetakkirimanditerima', [App\Http\Controllers\cetakController::class, 'cetakpesananditerima'])->name('cetakpesananditerima');
+Route::get('/admin/pesanan/cetakbaranglaris', [App\Http\Controllers\cetakController::class, 'cetakbaranglaris'])->name('cetakbaranglaris');
+Route::get('/admin/pesanan/cetakbarangtidaklaris', [App\Http\Controllers\cetakController::class, 'cetakbarangtidaklaris'])->name('cetakbarangtidaklaris');
+Route::get('/admin/pesanan/cetakbarangtransaksi', [App\Http\Controllers\cetakController::class, 'cetakbarangtransaksi'])->name('cetakbarangtransaksi');
+Route::get('/admin/pesanan/cetakcart/{id}/{idu}', [App\Http\Controllers\cetakController::class, 'cetakcart'])->name('cetakcart');
+Route::get('/admin/pesanan/cetakkeuangan', [App\Http\Controllers\cetakController::class, 'cetakkeuangan'])->name('cetakkeuangan');
+});
+
 
 Route::get('/cetak/nota', [App\Http\Controllers\CetakController::class, 'nota'])->name('nota');
