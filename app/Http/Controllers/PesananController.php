@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\banyak;
 use App\Models\courier;
 use App\Models\Kategori;
 use App\Models\Pesanan;
@@ -10,6 +11,7 @@ use App\Models\Produk;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PesananController extends Controller
@@ -174,6 +176,24 @@ class PesananController extends Controller
         $data = Pesanan::where('notransaksi',$request->notransaksi)->first();
         $data->status = 13;
         $data->update();
+
+        $detail = Pesanan_detail::where('notransaksi', $request->notransaksi)->first();
+        $cari = banyak::where('user_id', Auth()->user()->id)->first();
+
+        if($cari->user_id == Auth()->user()->id){
+            $banyak = banyak::where('user_id', Auth()->user()->id)->first();
+            $banyak->barang = $detail::WhereNotNull('notransaksi')->where('user_id', Auth()->user()->id)->count('user_id');
+            $banyak->kuantitas = $detail::WhereNotNull('notransaksi')->where('user_id', Auth()->user()->id)->sum('jumlah_produk');
+            $banyak->tranksasi = $banyak->tranksasi + 1 ;
+            $banyak->save();
+        }else{
+            $banyak = new Banyak();
+            $banyak->user_id = Auth()->user()->id;
+            $banyak->barang = $detail::WhereNotNull('notransaksi')->where('user_id', Auth()->user()->id)->count('user_id');
+            $banyak->kuantitas = $detail::WhereNotNull('notransaksi')->where('user_id', Auth()->user()->id)->sum('jumlah_produk');
+            $banyak->tranksasi = 1 ;
+            $banyak->save();
+        }
 
         Pesanan_detail::where('notransaksi',$request->notransaksi)->where('status', 2)->update(['status' => 5]);
 

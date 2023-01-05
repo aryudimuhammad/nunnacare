@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banyak;
 use App\Models\courier;
 use App\Models\Pesanan;
 use App\Models\Pesanan_detail;
@@ -255,5 +256,17 @@ class CetakController extends Controller
         $pdf = PDF::loadview('cetak.couriersatuan', compact('data','courier'));
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('cetak-user-pdf');
+    }
+
+    public function cetakpelanggan()
+    {
+        $data = Banyak::join('users','banyaks.user_id', '=' , 'users.id')
+        ->select('banyaks.barang','banyaks.kuantitas','banyaks.tranksasi','users.name','users.alamat','users.telepon')
+        ->orderBy('banyaks.kuantitas','desc')->limit(5)
+        ->get();
+
+            $pdf = PDF::loadview('cetak.pelanggan', compact('data'));
+            $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('cetak-pesanan-pdf');
     }
 }

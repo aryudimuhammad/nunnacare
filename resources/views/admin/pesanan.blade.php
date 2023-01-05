@@ -17,14 +17,14 @@
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Pesanan</a></li>
             </ol>
-          </div>
         </div>
-      </div><!-- /.container-fluid -->
+        </div>
+    </div><!-- /.container-fluid -->
     </section>
 <section class="content">
-      <div class="container-fluid">
+    <div class="container-fluid">
             <div class="card">
-              <div class="card-header">
+            <div class="card-header">
                 <!-- <a style="float: right; margin-left: 8px;" href="{{route('cetakkeuangan')}}" class="btn btn-sm btn-outline-info">Keuangan</a> -->
                 <button style="float: right; margin-left: 8px;" data-bs-toggle="modal" data-bs-target="#cetakModal" href="{{route('cetakkeuangan')}}" target="_blank" class="btn btn-sm btn-outline-info">Keuangan</button>
                 <a style="float: right; margin-left: 8px;" href="{{route('cetakbarangtransaksi')}}" target="_blank" class="btn btn-sm btn-outline-info">Transaksi</a>
@@ -34,12 +34,13 @@
                 <a style="float: right; margin-left: 8px;" href="{{route('cetakpesananprosespengiriman')}}" target="_blank" class="btn btn-sm btn-outline-info">Dalam Pengiriman</a>
                 <a style="float: right; margin-left: 8px;" href="{{route('cetakpesanantelahsampai')}}" target="_blank" class="btn btn-sm btn-outline-info">Telah Sampai</a>
                 <a style="float: right; margin-left: 8px;" href="{{route('cetakpesananditerima')}}" target="_blank" class="btn btn-sm btn-outline-info">Terjual</a>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
+                <a style="float: right; margin-left: 8px;" href="{{route('cetakpelanggan')}}" target="_blank" class="btn btn-sm btn-outline-info">Pelanggan Paling Banyak Beli</a>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
                     <th>No</th>
                     <th>Customer</th>
                     <th>Notransaksi</th>

@@ -87,6 +87,7 @@ Route::get('/admin/pesanan/cetakbarangtidaklaris', [App\Http\Controllers\cetakCo
 Route::get('/admin/pesanan/cetakbarangtransaksi', [App\Http\Controllers\cetakController::class, 'cetakbarangtransaksi'])->name('cetakbarangtransaksi');
 Route::get('/admin/pesanan/cetakcart/{id}/{idu}', [App\Http\Controllers\cetakController::class, 'cetakcart'])->name('cetakcart');
 Route::get('/admin/pesanan/cetakkeuangan', [App\Http\Controllers\cetakController::class, 'cetakkeuangan'])->name('cetakkeuangan');
+Route::get('/admin/pesanan/cetakpelanggan', [App\Http\Controllers\cetakController::class, 'cetakpelanggan'])->name('cetakpelanggan');
 });
 
 Route::group(['middleware' => ['auth', 'Checkrole:1,3']], function ()
